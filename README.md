@@ -25,9 +25,10 @@ agujero de la goma.
 
 | Archivo | Para qué |
 |---|---|
-| `stl/prueba_ajuste.stl` | **Imprimir primero.** 15 tapones (3 formas × 5 tamaños) para elegir el ajuste. |
-| `stl/avensis_3_botones.stl` | Los 3 botones listos para imprimir. |
+| `3mf/prueba_ajuste.3mf` (o `stl/prueba_ajuste.stl`) | **Imprimir primero.** 15 tapones (3 formas × 5 tamaños) para elegir el ajuste. |
+| `3mf/avensis_3_botones.3mf` (o `.stl`) | Los 3 botones listos para imprimir. |
 | `stl/boton_lock.stl`, `stl/boton_unlock.stl`, `stl/boton_arriba_izq.stl` | Botones sueltos. |
+| `3mf/` | Los mismos modelos en 3MF, cada botón como objeto separado (recomendado para Bambu Studio). |
 | `scad/avensis_botones.scad` | Modelo paramétrico (OpenSCAD o el *Parametric Model Maker* de MakerWorld). |
 
 ## Paso 1 – Medir (calibre)
@@ -48,8 +49,13 @@ permanentemente, bájalo (o sube `nub_gap`).
 
 ## Paso 2 – Prueba de ajuste
 
-Imprime `stl/prueba_ajuste.stl` (≈10 min). Cada fila es un agujero (arriba = LOCK grande en la
-vista de impresión volteada; compáralas a ojo) y las **muescas del borde** indican la escala:
+Imprime `3mf/prueba_ajuste.3mf` (≈10 min, placa de unos 77 × 39 mm con **15 piezas**).
+Vista desde arriba en Bambu Studio:
+
+- **Fila de arriba:** botón arriba‑izquierda (sin rotular).
+- **Fila del medio:** botón UNLOCK.
+- **Fila de abajo:** botón LOCK (los más anchos).
+- **De izquierda a derecha:** de más pequeño a más grande. Las **muescas del borde** indican la escala:
 
 | Muescas | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
