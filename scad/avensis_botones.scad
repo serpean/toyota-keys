@@ -2,75 +2,82 @@
 //  Botones de repuesto para mando Toyota Avensis (T25, 2003-2009)
 //  Llave Valeo de 3 botones (hoja TOY43) - tambien Lexus IS/GS/RX de la época
 //
-//  El botón es un "tapón": la tapa queda por encima de la goma original,
-//  el vástago entra por el agujero roto de la goma, un pequeño reborde
-//  (barb) lo retiene por debajo y un pivote (nub) aprieta el pulsador SMD.
+//  v2 - BOTON CON PESTAÑA INTERIOR (como el original de goma)
 //
-//  Modelado en posición de USO (z+ = hacia fuera) y girado 180 grados
-//  para imprimir con la cara superior apoyada en la cama (acabado liso,
-//  sin soportes).
+//        ┌──────┐          <- asoma por la ventana (protrude)
+//   ═════╡      ╞═════     <- carcasa (shell_t)
+//      ◢─┘      └─◣        <- pestaña: mas grande que la ventana, no se sale
+//      └────┬┬────┘
+//           └┘             <- pivote: aprieta el micropulsador
+//   ─────[pulsador]─────
 //
-//  Pensado para Bambu Lab P2S con boquilla 0.2 mm (PETG / ASA / PLA).
-//  TODAS LAS MEDIDAS EN mm. Mide con calibre y ajusta la seccion MEDIDAS.
+//  Se monta DESDE DENTRO con la llave abierta: botón en su ventana,
+//  módulo encima y cerrar. No necesita pegamento.
+//
+//  Modelado en posición de USO (z = 0 superficie exterior de la carcasa,
+//  z+ hacia fuera) y girado 180 grados para imprimir con la cara del
+//  icono contra la cama. Sin soportes: la pestaña tiene chaflán a 45°.
+//
+//  Pensado para Bambu Lab P2S con boquilla 0.2 mm (PETG / ASA).
+//  TODAS LAS MEDIDAS EN mm, tomadas con calibre en la llave real.
 // =====================================================================
 
 /* [Que exportar] */
-// caps = los 3 botones, fit = piezas de prueba de ajuste, one = un boton suelto
-part = "caps"; // [caps, fit, one, preview]
-// Boton para part="one": 0 = arriba-izq, 1 = UNLOCK (arriba-der), 2 = LOCK (abajo)
-which = 1; // [0,1,2]
+// caps = 3 botones; fit = 3 juegos con distinta holgura (1, 2 y 3 puntos); one = uno suelto
+part = "fit"; // [caps, fit, one, preview]
+// Boton para part="one": 0 = arriba-izq, 1 = UNLOCK, 2 = LOCK
+which = 2; // [0,1,2]
 
-/* [MEDIDAS - agujeros en la goma] */
-// [ancho, alto, radio esquina] de cada agujero de la goma (medidos en la foto, ~+-0.5 mm)
-hole_tl = [8.8, 8.6, 1.2];   // arriba-izquierda (sin rotular)
-hole_un = [8.8, 9.0, 1.2];   // arriba-derecha  "UNLOCK"
-hole_lk = [11.8, 9.2, 1.2];  // abajo          "LOCK"
-// Escala global del vastago (usa el resultado de las piezas "fit")
-size_scale = 1.00;
-// Holgura por lado entre vastago y goma
+/* [MEDIDAS de la llave (calibre)] */
+// [ancho, alto, radio esquina] de las ventanas de la carcasa
+win_tl = [8.3, 8.0, 1.0];   // arriba-izquierda
+win_un = [8.3, 8.0, 1.0];   // arriba-derecha "UNLOCK"
+win_lk = [9.7, 8.0, 1.0];   // abajo "LOCK"
+// Profundidad desde la superficie de la carcasa hasta la cima del pulsador (llave cerrada)
+depth_tl = 3.65;
+depth_un = 3.35;
+depth_lk = 3.20;
+// Grosor de la carcasa en el borde de la ventana
+shell_t = 1.8;
+
+/* [Ajuste] */
+// Holgura por lado entre boton y ventana (part="caps"/"one")
 clearance = 0.15;
+// Holguras de los 3 juegos de part="fit" (1, 2 y 3 puntos grabados)
+fit_clearances = [0.10, 0.15, 0.22];
+// Cuanto asoma el boton por fuera de la carcasa
+protrude = 1.5;
+// Chaflan del borde exterior
+top_chamfer = 0.3;
 
-/* [MEDIDAS - profundidades] */
-// Grosor de la goma en el borde del agujero
-membrane_t = 1.6;
-// Desde la superficie de la goma hasta la cima del pulsador (medir con la sonda del calibre)
-switch_depth = 2.8;
-// Holgura del pivote antes de tocar el pulsador (recorrido libre)
-nub_gap = 0.20;
-
-/* [Tapa] */
-// Cuanto sobresale la tapa sobre la goma alrededor del agujero
-cap_overlap = 0.9;
-// Altura de la tapa por encima de la goma
-cap_h = 1.6;
-// Chaflan del borde superior
-cap_chamfer = 0.4;
-
-/* [Retencion y pivote] */
-// Reborde de retencion por lado (0 = sin reborde, para pegar)
-barb = 0.30;
-// Altura del reborde
-barb_h = 0.6;
-// Diametro del pivote que aprieta el pulsador
+/* [Pestaña y pivote] */
+// Cuanto sobresale la pestaña por cada lado de la ventana
+flange_ov = 0.5;
+// Grosor de la parte plana de la pestaña
+flange_t = 0.4;
+// Diametro del pivote
 nub_d = 2.4;
+// Holgura entre pivote y pulsador en reposo
+nub_gap = 0.15;
 
 /* [Iconos grabados] */
 icon_tl = "none";   // [none, lock, unlock, trunk, dot]
 icon_un = "unlock"; // [none, lock, unlock, trunk, dot]
 icon_lk = "lock";   // [none, lock, unlock, trunk, dot]
 icon_depth = 0.4;
-// Ancho de trazo del icono (>= 2 lineas con boquilla 0.2)
+// Ancho de trazo (>= 2 lineas con boquilla 0.2)
 icon_line = 0.45;
 
 $fn = 48;
 eps = 0.01;
 
-HOLES = [hole_tl, hole_un, hole_lk];
-ICONS = [icon_tl, icon_un, icon_lk];
+WINS   = [win_tl, win_un, win_lk];
+DEPTHS = [depth_tl, depth_un, depth_lk];
+ICONS  = [icon_tl, icon_un, icon_lk];
 
 // ---------------------------------------------------------------- 2D
 module rrect(w, h, r) {
-    rr = min(r, w/2 - eps, h/2 - eps);
+    rr = max(0.05, min(r, w/2 - eps, h/2 - eps));
     offset(r = rr) square([w - 2*rr, h - 2*rr], center = true);
 }
 
@@ -81,13 +88,11 @@ module slab(w, h, r, z0, t) {
 module icon2d(kind) {
     L = icon_line;
     if (kind == "lock" || kind == "unlock") {
-        // cuerpo
         translate([0, -0.9]) difference() {
             square([3.4, 2.6], center = true);
             square([3.4 - 2*L, 2.6 - 2*L], center = true);
         }
         translate([0, -0.9]) circle(d = 0.7, $fn = 16);
-        // arco (en "unlock" sube y se desplaza: candado abierto)
         dx = (kind == "unlock") ? 0.9 : 0;
         dy = (kind == "unlock") ? 0.7 : 0;
         translate([dx, 0.4 + dy]) difference() {
@@ -98,7 +103,6 @@ module icon2d(kind) {
         if (kind == "unlock")
             translate([dx + 1.2 - L, 0.3]) square([L, dy + 0.1]);
     } else if (kind == "trunk") {
-        // silueta de coche con maletero abierto (simplificada)
         difference() { square([4.4, 1.6], center = true); square([4.4 - 2*L, 1.6 - 2*L], center = true); }
         translate([1.6, 0.8]) rotate(35) square([L, 1.6]);
     } else if (kind == "dot") {
@@ -107,67 +111,60 @@ module icon2d(kind) {
 }
 
 // ------------------------------------------------------------ 3D boton
-// i: indice del agujero; s: escala; notches: marcas de identificacion; with_nub
-module cap(i, s = size_scale, icon = "none", notches = 0, with_nub = true) {
-    hw = HOLES[i][0] * s - 2*clearance;
-    hh = HOLES[i][1] * s - 2*clearance;
-    r  = HOLES[i][2];
-    tw = hw + 2*cap_overlap;
-    th = hh + 2*cap_overlap;
-    tr = r + cap_overlap;
-    nub_len = max(switch_depth - nub_gap, membrane_t + barb + barb_h + 0.2);
+module button(i, clr = clearance, icon = "none", dots = 0) {
+    w = WINS[i][0] - 2*clr;
+    h = WINS[i][1] - 2*clr;
+    r = WINS[i][2];
+    z0 = -shell_t + clr;                      // donde el chaflan toca el borde de la ventana
+    zf = z0 - flange_ov - flange_t;           // cara inferior de la pestaña
+    tip = -(DEPTHS[i] - nub_gap);             // punta del pivote
+    nub_len = zf - tip;
+    if (nub_len < 0.2)
+        echo(str("AVISO boton ", i, ": pivote muy corto (", nub_len, " mm). Revisa depth/shell_t."));
 
     difference() {
         union() {
-            // tapa con chaflan superior
+            // cuerpo que atraviesa la ventana y asoma por fuera
             hull() {
-                slab(tw, th, tr, 0, cap_h - cap_chamfer);
-                slab(tw - 2*cap_chamfer, th - 2*cap_chamfer, max(tr - cap_chamfer, 0.3), cap_h - eps, eps);
+                slab(w, h, r, z0, protrude - z0 - top_chamfer);
+                slab(w - 2*top_chamfer, h - 2*top_chamfer, r - top_chamfer, protrude - eps, eps);
             }
-            // vastago a traves de la goma
-            slab(hh > 0 ? hw : 1, hh, r, -membrane_t, membrane_t + eps);
-            // reborde de retencion (doble chaflan, imprimible sin soportes)
-            if (barb > 0) hull() {
-                slab(hw, hh, r, -membrane_t, eps);
-                slab(hw + 2*barb, hh + 2*barb, r + barb, -membrane_t - barb, eps);
-                slab(hw, hh, r, -membrane_t - barb - barb_h, eps);
+            // pestaña interior con chaflan a 45 grados (imprimible sin soportes)
+            hull() {
+                slab(w, h, r, z0, eps);
+                slab(w + 2*flange_ov, h + 2*flange_ov, r + flange_ov, zf, flange_t);
             }
             // pivote
-            if (with_nub)
-                translate([0, 0, -nub_len]) cylinder(d = nub_d, h = nub_len);
+            if (nub_len > 0)
+                translate([0, 0, tip]) cylinder(d = nub_d, h = nub_len + eps);
         }
-        // icono grabado en la cara superior
+        // icono grabado
         if (icon != "none")
-            translate([0, 0, cap_h - icon_depth]) linear_extrude(icon_depth + 1)
-                scale(min(1, hh / 9)) translate(icon == "unlock" ? [-0.45, -0.35] : [0, 0]) icon2d(icon);
-        // muescas de identificacion en el borde (piezas de prueba)
-        for (k = [0 : notches - 1]) if (notches > 0)
-            translate([-tw/2 + 1.5 + k*1.4, th/2, -1]) cylinder(d = 0.8, h = cap_h + 2, $fn = 12);
+            translate([0, 0, protrude - icon_depth]) linear_extrude(icon_depth + 1)
+                translate(icon == "unlock" ? [-0.45, -0.35] : [0, 0]) icon2d(icon);
+        // puntos de identificacion (part="fit") en la esquina superior izquierda
+        for (k = [0 : max(dots - 1, 0)]) if (dots > 0)
+            translate([-w/2 + 1.0 + k*0.9, h/2 - 1.0, protrude - 0.3])
+                cylinder(d = 0.6, h = 1, $fn = 12);
     }
 }
 
-// girar a orientacion de impresion: cara superior en z = 0
-module print_orient() { translate([0, 0, cap_h]) rotate([180, 0, 0]) children(); }
+// girar a orientacion de impresion: cara exterior en z = 0
+module print_orient() { translate([0, 0, protrude]) rotate([180, 0, 0]) children(); }
+
+module set3(clr, dots = 0) {
+    translate([-6, 6, 0]) button(0, clr, ICONS[0], dots);
+    translate([ 6, 6, 0]) button(1, clr, ICONS[1], dots);
+    translate([ 0, -6, 0]) button(2, clr, ICONS[2], dots);
+}
 
 // ------------------------------------------------------------ salidas
 if (part == "caps") {
-    print_orient() {
-        translate([-8, 7, 0])  cap(0, icon = ICONS[0]);
-        translate([ 8, 7, 0])  cap(1, icon = ICONS[1]);
-        translate([ 0, -7, 0]) cap(2, icon = ICONS[2]);
-    }
+    print_orient() set3(clearance);
 } else if (part == "one") {
-    print_orient() cap(which, icon = ICONS[which]);
+    print_orient() button(which, clearance, ICONS[which]);
 } else if (part == "fit") {
-    // 5 escalas x 3 agujeros. Muescas: 1=0.94 2=0.97 3=1.00 4=1.03 5=1.06
-    scales = [0.94, 0.97, 1.00, 1.03, 1.06];
-    print_orient()
-        for (i = [0:2]) for (j = [0:4])
-            translate([j * 16 - 32, i * 14 - 14, 0])
-                cap(i, s = scales[j], notches = j + 1, with_nub = false);
+    print_orient() for (j = [0:2]) translate([(j - 1) * 28, 0, 0]) set3(fit_clearances[j], j + 1);
 } else {
-    // vista previa en posicion de uso
-    translate([-8, 7, 0])  cap(0, icon = ICONS[0]);
-    translate([ 8, 7, 0])  cap(1, icon = ICONS[1]);
-    translate([ 0, -7, 0]) cap(2, icon = ICONS[2]);
+    set3(clearance);
 }

@@ -5,109 +5,81 @@ Toyota Avensis T25 (2003‑2009). La misma carcasa la usan Lexus IS/GS/RX de la 
 
 ![Llave original](img/llave_original.jpg)
 
-La goma original se rompe justo encima de cada pulsador y deja el circuito al aire.
-Este proyecto **no sustituye la goma entera**: hace un *botón tapón* que se encaja en cada
-agujero de la goma.
+Los botones de goma originales se deshacen y dejan las ventanas de la carcasa vacías.
+Estos botones sustituyen a los originales: **se meten por dentro de la carcasa**, asoman
+por la ventana y una pestaña interior impide que se salgan. Debajo, un pivote aprieta el
+micropulsador del módulo.
+
+![Montaje](img/montaje.png)
 
 ![Vista previa](img/preview.png)
 ![Vista inferior](img/abajo.png)
 
-```
-        ┌──────────────┐   ← tapa (1.6 mm, apoyada sobre la goma, icono grabado)
-   ═════╡              ╞═════  ← goma original (≈1.6 mm)
-        │   vástago    │
-        ◢──────────────◣   ← reborde de retención (0.3 mm, sujeta por debajo de la goma)
-               ▮           ← pivote Ø2.4 que aprieta el micropulsador
-   ─────────[pulsador]───────  PCB
-```
+## Medidas (tomadas con calibre en la llave real)
+
+| Ventana | Ancho × alto | Profundidad hasta el pulsador* |
+|---|---|---|
+| Arriba‑izquierda | 8,3 × 8,0 | 3,65 |
+| UNLOCK (arriba‑derecha) | 8,3 × 8,0 | 3,35 |
+| LOCK (abajo) | 9,7 × 8,0 | 3,20 |
+
+\* Desde la superficie exterior de la carcasa, con la llave cerrada.
+Grosor de la carcasa en el borde de la ventana: **1,8 mm**. Grosor del módulo: 7,85 mm.
 
 ## Archivos
 
 | Archivo | Para qué |
 |---|---|
-| `3mf/prueba_ajuste.3mf` (o `stl/prueba_ajuste.stl`) | **Imprimir primero.** 15 tapones (3 formas × 5 tamaños) para elegir el ajuste. |
-| `3mf/avensis_3_botones.3mf` (o `.stl`) | Los 3 botones listos para imprimir. |
-| `stl/boton_lock.stl`, `stl/boton_unlock.stl`, `stl/boton_arriba_izq.stl` | Botones sueltos. |
-| `3mf/` | Los mismos modelos en 3MF, cada botón como objeto separado (recomendado para Bambu Studio). |
+| `3mf/prueba_holgura_3_juegos.3mf` | **Imprimir primero.** 3 juegos completos con holgura 0,10 / 0,15 / 0,22 mm (marcados con 1, 2 y 3 puntos). Te quedas con el que mejor entre. |
+| `3mf/avensis_3_botones.3mf` | Un juego de 3 botones con la holgura por defecto (0,15). |
+| `3mf/boton_*.3mf` | Botones sueltos. |
+| `stl/` | Lo mismo en STL. |
 | `scad/avensis_botones.scad` | Modelo paramétrico (OpenSCAD o el *Parametric Model Maker* de MakerWorld). |
+| `tools/dibujo_montaje.py` | Genera `img/montaje.png`. |
 
-## Paso 1 – Medir (calibre)
+Al abrir un 3MF, Bambu Studio avisa *"The 3mf file has invalid config, load geometry data only"*:
+es normal, pulsa OK y elige impresora, placa, filamento y perfil.
 
-No hay planos públicos de este mando y las medidas por defecto salen de la foto
-(error ±0.5 mm). Antes de imprimir los definitivos, mide y corrige en el `.scad`:
+## Imprimir en Bambu Lab P2S, boquilla 0.2 mm
 
-| Parámetro | Qué medir | Valor por defecto |
-|---|---|---|
-| `hole_tl` | ancho × alto del agujero arriba‑izquierda | 8.8 × 8.6 |
-| `hole_un` | agujero UNLOCK | 8.8 × 9.0 |
-| `hole_lk` | agujero LOCK | 11.8 × 9.2 |
-| `membrane_t` | grosor de la goma en el borde del agujero | 1.6 |
-| `switch_depth` | profundidad desde la superficie de la goma hasta la cima del pulsador (sonda de profundidad del calibre) | 2.8 |
-
-Si el pivote no llega al pulsador, sube `switch_depth`; si el botón queda pulsado
-permanentemente, bájalo (o sube `nub_gap`).
-
-## Paso 2 – Prueba de ajuste
-
-Imprime `3mf/prueba_ajuste.3mf` (≈10 min, placa de unos 77 × 39 mm con **15 piezas**).
-Vista desde arriba en Bambu Studio:
-
-- **Fila de arriba:** botón arriba‑izquierda (sin rotular).
-- **Fila del medio:** botón UNLOCK.
-- **Fila de abajo:** botón LOCK (los más anchos).
-- **De izquierda a derecha:** de más pequeño a más grande. Las **muescas del borde** indican la escala:
-
-| Muescas | 1 | 2 | 3 | 4 | 5 |
-|---|---|---|---|---|---|
-| `size_scale` | 0.94 | 0.97 | 1.00 | 1.03 | 1.06 |
-
-Elige el que entra con un poco de presión y "clic" al pasar el reborde, pon ese valor en
-`size_scale` y exporta de nuevo (`part = "caps"`).
-
-## Paso 3 – Imprimir en Bambu Lab P2S, boquilla 0.2 mm
-
-Los botones se imprimen **boca abajo** (la cara del icono contra la cama): sin soportes y con
-la superficie superior lisa (o texturizada si usas la placa PEI texturizada, que da buen tacto).
+Los botones se imprimen **con la cara del icono contra la cama**: sin soportes (la pestaña
+crece a 45°) y con la superficie exterior con la textura de la placa.
 
 | Ajuste en Bambu Studio | Valor |
 |---|---|
 | Impresora / boquilla | Bambu Lab P2S – 0.2 mm |
-| Perfil de proceso | `0.08mm High Quality @BBL P2S 0.2 nozzle` (o 0.10 Standard) |
-| Material | **PETG** o **ASA** (aguantan el calor del coche). PLA vale para probar, se puede deformar al sol |
+| Placa | Textured PEI |
+| Perfil de proceso | `0.08mm High Quality @BBL P2S 0.2 nozzle` |
+| Material | **ASA** (ideal: aguanta calor y sol) o **PETG**. PLA solo para pruebas |
 | Paredes | 3–4 |
-| Relleno | 100 % (piezas diminutas) |
+| Relleno | 100 % |
 | Soportes | No |
-| Borde (brim) | No (si se despegan: brim 2 mm) |
-| Placa | PEI texturizada (o Smooth PEI con pegamento para PETG) |
-| Ironing (planchado) | Opcional, en la cara superior no es necesario porque va contra la cama |
 
-> **TPU:** Bambu no recomienda TPU con boquilla 0.2 (atasca). Si quieres botones blandos,
-> cambia a la boquilla 0.4 y usa TPU 95A por la bobina externa; el modelo es el mismo.
+> **TPU:** Bambu no recomienda TPU con boquilla 0.2. Para botones blandos, boquilla 0.4 y TPU 95A.
 
-## Paso 4 – Montaje
+## Montaje
 
-![Montaje](img/montaje.png)
+1. Abre la llave (tornillo de atrás) y saca el módulo emisor.
+2. Limpia restos de goma vieja con alcohol isopropílico.
+3. Con la carcasa delantera boca abajo, mete cada botón **por dentro** en su ventana, con el
+   icono hacia fuera. La pestaña queda apoyada por dentro alrededor de la ventana.
+4. Vuelve a poner el módulo encima, cierra y atornilla.
+5. Prueba: cada botón debe hacer *clic* al pulsarlo y volver solo.
 
-La **tapa** (parte grande, cara lisa que tocó la cama) va hacia fuera; el **vástago** (parte pequeña) entra en el agujero de la goma.
-
-1. Limpia los restos de goma rota alrededor del agujero con un cúter.
-2. Comprueba que el mando funciona pulsando el micropulsador con un palillo.
-3. Mete el vástago en el agujero y aprieta hasta que el reborde pase por debajo de la goma.
-4. Opcional: una gota de pegamento flexible (tipo silicona, Loctite Super Glue Power Flex o
-   E6000) en el reborde de la tapa, **sin** que llegue al pulsador.
-
-Si la goma está muy deshecha, pon `barb = 0` y simplemente pega las tapas, o compra la goma
-de repuesto (≈2‑8 €, busca "Toyota Avensis rubber pad 3 button").
+Si alguno:
+- **no hace nada:** el pivote no llega → sube su `depth_*` 0,2 mm en el `.scad`.
+- **se queda pulsado** o la llave no cierra bien: baja su `depth_*` 0,2 mm.
+- **roza en la ventana:** usa el juego con más puntos (más holgura).
+- **baila mucho:** usa el juego con menos puntos.
 
 ## Exportar desde OpenSCAD
 
 ```sh
-openscad -o stl/avensis_3_botones.stl -D 'part="caps"' -D size_scale=1.00 scad/avensis_botones.scad
-openscad -o stl/prueba_ajuste.stl     -D 'part="fit"'  scad/avensis_botones.scad
+openscad -o stl/avensis_3_botones.stl       -D 'part="caps"' -D clearance=0.15 scad/avensis_botones.scad
+openscad -o stl/prueba_holgura_3_juegos.stl -D 'part="fit"'  scad/avensis_botones.scad
 ```
 
-Iconos disponibles por botón (`icon_tl`, `icon_un`, `icon_lk`): `none`, `lock`, `unlock`,
-`trunk`, `dot`.
+Iconos por botón (`icon_tl`, `icon_un`, `icon_lk`): `none`, `lock`, `unlock`, `trunk`, `dot`.
 
 ## Referencias
 
