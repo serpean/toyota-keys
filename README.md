@@ -31,6 +31,7 @@ Grosor de la carcasa en el borde de la ventana: **1,8 mm**. Grosor del módulo: 
 | Archivo | Para qué |
 |---|---|
 | `3mf/prueba_holgura_3_juegos.3mf` | **Imprimir primero.** 3 juegos completos con holgura 0,10 / 0,15 / 0,22 mm (marcados con 1, 2 y 3 puntos). Te quedas con el que mejor entre. |
+| `3mf/prueba_ancho_botones_arriba.3mf` | Si los botones de arriba no entran: 4 anchos (7,9 / 7,6 / 7,3 / 7,0 mm de ventana, 1‑4 puntos) para arriba‑izquierda (fila de arriba) y UNLOCK (fila de abajo). |
 | `3mf/avensis_3_botones.3mf` | Un juego de 3 botones con la holgura por defecto (0,15). |
 | `3mf/boton_*.3mf` | Botones sueltos. |
 | `stl/` | Lo mismo en STL. |

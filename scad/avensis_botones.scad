@@ -24,7 +24,7 @@
 
 /* [Que exportar] */
 // caps = 3 botones; fit = 3 juegos con distinta holgura (1, 2 y 3 puntos); one = uno suelto
-part = "fit"; // [caps, fit, one, preview]
+part = "fit_top"; // [caps, fit, fit_top, one, preview]
 // Boton para part="one": 0 = arriba-izq, 1 = UNLOCK, 2 = LOCK
 which = 2; // [0,1,2]
 
@@ -39,6 +39,12 @@ depth_un = 3.35;
 depth_lk = 3.20;
 // Grosor de la carcasa en el borde de la ventana
 shell_t = 1.8;
+
+/* [Prueba de ancho para los botones de arriba (part="fit_top")] */
+// Anchos de ventana a probar (1, 2, 3 y 4 puntos)
+fit_top_widths = [7.9, 7.6, 7.3, 7.0];
+// Radio de esquina para la prueba (mas redondeado por si la ventana lo es)
+fit_top_radius = 1.5;
 
 /* [Ajuste] */
 // Holgura por lado entre boton y ventana (part="caps"/"one")
@@ -111,10 +117,11 @@ module icon2d(kind) {
 }
 
 // ------------------------------------------------------------ 3D boton
-module button(i, clr = clearance, icon = "none", dots = 0) {
-    w = WINS[i][0] - 2*clr;
-    h = WINS[i][1] - 2*clr;
-    r = WINS[i][2];
+module button(i, clr = clearance, icon = "none", dots = 0, win = undef) {
+    wv = (win == undef) ? WINS[i] : win;
+    w = wv[0] - 2*clr;
+    h = wv[1] - 2*clr;
+    r = wv[2];
     z0 = -shell_t + clr;                      // donde el chaflan toca el borde de la ventana
     zf = z0 - flange_ov - flange_t;           // cara inferior de la pestaña
     tip = -(DEPTHS[i] - nub_gap);             // punta del pivote
@@ -163,6 +170,11 @@ if (part == "caps") {
     print_orient() set3(clearance);
 } else if (part == "one") {
     print_orient() button(which, clearance, ICONS[which]);
+} else if (part == "fit_top") {
+    // fila de arriba: boton arriba-izquierda; fila de abajo: UNLOCK
+    print_orient() for (j = [0:3]) for (i = [0:1])
+        translate([(j - 1.5) * 12, (i == 0 ? 6 : -6), 0])
+            button(i, clearance, ICONS[i], j + 1, [fit_top_widths[j], WINS[i][1], fit_top_radius]);
 } else if (part == "fit") {
     print_orient() for (j = [0:2]) translate([(j - 1) * 28, 0, 0]) set3(fit_clearances[j], j + 1);
 } else {
