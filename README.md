@@ -19,11 +19,12 @@ micropulsador del módulo.
 
 | Ventana | Ancho × alto | Profundidad hasta el pulsador* |
 |---|---|---|
-| Arriba‑izquierda | 8,3 × 8,0 | 3,65 |
-| UNLOCK (arriba‑derecha) | 8,3 × 8,0 | 3,35 |
+| Arriba‑izquierda | 8,3 × 8,0 medido → **7,9 × 8,0** en el modelo | 3,65 |
+| UNLOCK (arriba‑derecha) | 8,3 × 8,0 medido → **7,9 × 8,0** en el modelo | 3,35 |
 | LOCK (abajo) | 9,7 × 8,0 | 3,20 |
 
 \* Desde la superficie exterior de la carcasa, con la llave cerrada.
+Los botones de arriba con 8,3 mm no entraban (el LOCK sí, con holgura 0,15), así que el modelo usa 7,9 mm y esquinas de r 1,5.
 Grosor de la carcasa en el borde de la ventana: **1,8 mm**. Grosor del módulo: 7,85 mm.
 
 ## Archivos
@@ -31,7 +32,8 @@ Grosor de la carcasa en el borde de la ventana: **1,8 mm**. Grosor del módulo: 
 | Archivo | Para qué |
 |---|---|
 | `3mf/prueba_holgura_3_juegos.3mf` | **Imprimir primero.** 3 juegos completos con holgura 0,10 / 0,15 / 0,22 mm (marcados con 1, 2 y 3 puntos). Te quedas con el que mejor entre. |
-| `3mf/prueba_ancho_botones_arriba.3mf` | Si los botones de arriba no entran: 4 anchos (7,9 / 7,6 / 7,3 / 7,0 mm de ventana, 1‑4 puntos) para arriba‑izquierda (fila de arriba) y UNLOCK (fila de abajo). |
+| `3mf/prueba_ancho_botones_arriba.3mf` | Si los botones de arriba no entran: 4 anchos (7,9 / 7,6 / 7,3 / 7,0 mm de ventana, 1‑4 puntos) en Bambu Studio la fila de delante es arriba‑izquierda (5,0 mm de alto) y la de atrás UNLOCK (4,7 mm). |
+| `3mf/botones_arriba.3mf` | Solo los 2 botones de arriba (ventana 7,9 mm). |
 | `3mf/avensis_3_botones.3mf` | Un juego de 3 botones con la holgura por defecto (0,15). |
 | `3mf/boton_*.3mf` | Botones sueltos. |
 | `stl/` | Lo mismo en STL. |

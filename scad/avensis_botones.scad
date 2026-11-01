@@ -24,14 +24,14 @@
 
 /* [Que exportar] */
 // caps = 3 botones; fit = 3 juegos con distinta holgura (1, 2 y 3 puntos); one = uno suelto
-part = "fit_top"; // [caps, fit, fit_top, one, preview]
+part = "caps"; // [caps, top, fit, fit_top, one, preview]
 // Boton para part="one": 0 = arriba-izq, 1 = UNLOCK, 2 = LOCK
 which = 2; // [0,1,2]
 
 /* [MEDIDAS de la llave (calibre)] */
 // [ancho, alto, radio esquina] de las ventanas de la carcasa
-win_tl = [8.3, 8.0, 1.0];   // arriba-izquierda
-win_un = [8.3, 8.0, 1.0];   // arriba-derecha "UNLOCK"
+win_tl = [7.9, 8.0, 1.5];   // arriba-izquierda (8,3 medido no entraba: 7,9 = juego de 1 punto de la prueba de ancho)
+win_un = [7.9, 8.0, 1.5];   // arriba-derecha "UNLOCK" (idem)
 win_lk = [9.7, 8.0, 1.0];   // abajo "LOCK"
 // Profundidad desde la superficie de la carcasa hasta la cima del pulsador (llave cerrada)
 depth_tl = 3.65;
@@ -170,8 +170,14 @@ if (part == "caps") {
     print_orient() set3(clearance);
 } else if (part == "one") {
     print_orient() button(which, clearance, ICONS[which]);
+} else if (part == "top") {
+    // solo los dos botones de arriba
+    print_orient() {
+        translate([-6, 0, 0]) button(0, clearance, ICONS[0]);
+        translate([ 6, 0, 0]) button(1, clearance, ICONS[1]);
+    }
 } else if (part == "fit_top") {
-    // fila de arriba: boton arriba-izquierda; fila de abajo: UNLOCK
+    // en el laminador (tras girar): fila de delante = arriba-izquierda, fila de atras = UNLOCK
     print_orient() for (j = [0:3]) for (i = [0:1])
         translate([(j - 1.5) * 12, (i == 0 ? 6 : -6), 0])
             button(i, clearance, ICONS[i], j + 1, [fit_top_widths[j], WINS[i][1], fit_top_radius]);
