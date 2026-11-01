@@ -86,6 +86,10 @@ la superficie superior lisa (o texturizada si usas la placa PEI texturizada, que
 
 ## Paso 4 – Montaje
 
+![Montaje](img/montaje.png)
+
+La **tapa** (parte grande, cara lisa que tocó la cama) va hacia fuera; el **vástago** (parte pequeña) entra en el agujero de la goma.
+
 1. Limpia los restos de goma rota alrededor del agujero con un cúter.
 2. Comprueba que el mando funciona pulsando el micropulsador con un palillo.
 3. Mete el vástago en el agujero y aprieta hasta que el reborde pase por debajo de la goma.
