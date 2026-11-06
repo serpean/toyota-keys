@@ -52,7 +52,7 @@ clearance = 0.15;
 // Holguras de los 3 juegos de part="fit" (1, 2 y 3 puntos grabados)
 fit_clearances = [0.10, 0.15, 0.22];
 // Cuanto asoma el boton por fuera de la carcasa
-protrude = 1.5;
+protrude = 0.8;
 // Chaflan del borde exterior
 top_chamfer = 0.3;
 

@@ -25,6 +25,7 @@ micropulsador del módulo.
 
 \* Desde la superficie exterior de la carcasa, con la llave cerrada.
 Los botones de arriba con 8,3 mm no entraban (el LOCK sí, con holgura 0,15), así que el modelo usa 7,9 mm y esquinas de r 1,5.
+Los botones asoman **0,8 mm** por fuera (`protrude`; la primera versión, 1,5 mm, sobresalía demasiado).
 Grosor de la carcasa en el borde de la ventana: **1,8 mm**. Grosor del módulo: 7,85 mm.
 
 ## Archivos

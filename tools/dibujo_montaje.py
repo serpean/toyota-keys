@@ -8,7 +8,7 @@ from matplotlib.patches import Polygon, Rectangle, FancyArrowPatch
 # medidas (mm) - z = 0 superficie exterior de la carcasa
 win, clr = 9.7, 0.15
 shell_t, depth = 1.8, 3.2
-protrude, ch = 1.5, 0.3
+protrude, ch = 0.8, 0.3
 ov, ft = 0.5, 0.4
 nub_d, gap = 2.4, 0.15
 
